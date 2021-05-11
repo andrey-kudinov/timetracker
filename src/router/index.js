@@ -1,29 +1,75 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "home",
+    meta: { layout: "main", log: true },
+    component: () => import("@/views/Home.vue"),
   },
+  // {
+  //   path: "/history",
+  //   name: "History",
+  //   meta: { layout: "main", log: true },
+  //   component: () =>
+  //     import("@/views/History.vue"),
+  // },
+  // {
+  //   path: "/profile",
+  //   name: "Profile",
+  //   meta: { layout: "main", log: true },
+  //   component: () =>
+  //     import("@/views/Profile.vue"),
+  // },
+  // {
+  //   path: "/info",
+  //   name: "Info",
+  //   meta: { layout: "main", log: true },
+  //   component: () =>
+  //     import("@/views/Info.vue"),
+  // },
+  // {
+  //   path: "/stats",
+  //   name: "Stats",
+  //   meta: { layout: "main", log: true },
+  //   component: () =>
+  //     import("@/views/Stats.vue"),
+  // },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: "/login",
+    name: "Login",
+    meta: { layout: "empty" },
+    component: () => import("@/views/Login.vue"),
+  },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ x: 0, y: 0 })
+        }, 500)
+      })
+    }
+  },
+  routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  if (to.matched.some((record) => record.meta.log)) {
+    if (!localStorage.getItem("user")) {
+      return next({ path: "/login" });
+    }
+  }
+  return next();
+});
 
 export default router
