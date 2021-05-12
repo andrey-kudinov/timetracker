@@ -1,7 +1,20 @@
 <template>
   <div class="header">
     <div class="time">
-      {{ date | date("datetime") }}, <br v-if="isMobile" />{{ userEmail }}
+      {{ date | date("datetime") }}
+    </div>
+
+    <div class="links">
+      <router-link
+        v-for="link in links"
+        :key="link.url"
+        tag="li"
+        active-class="active"
+        :to="link.url"
+        :exact="link.exact"
+      >
+        <a href="#">{{ link.title }}</a>
+      </router-link>
     </div>
 
     <div class="buttons">
@@ -13,13 +26,22 @@
 
 <script>
 export default {
-
   data() {
     return {
       date: new Date(),
       interval_1: null,
       interval_2: null,
       isMobile: false,
+      links: [
+        { title: "Главная", url: "/", exact: true },
+        { title: "Моё время", url: "/time" },
+        { title: "Профиль", url: "/profile" },
+        // { title: "Статистика", url: "/stats" },
+        // { title: "Описание", url: "/info" },
+        // { title: "Планирование", url: "/planning" },
+        // { title: "Новая запись", url: "/record" },
+        // { title: "Категории", url: "/categories" },
+      ],
     };
   },
   async mounted() {
@@ -68,8 +90,8 @@ export default {
 .header {
   background: radial-gradient(
     circle,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
+    rgb(122, 0, 209) 0%,
+    rgba(76, 0, 130) 100%
   );
   position: relative;
   display: flex;
@@ -133,5 +155,77 @@ export default {
     padding-right: 15px;
     padding-left: 15px;
   }
+}
+.links {
+  display: flex;
+}
+li {
+  list-style-type: none;
+  transition: transform 0.5s ease-out;
+  opacity: 1;
+  margin-right: 10px;
+}
+a {
+  background: linear-gradient(to right, #8ca6db, #b993d6);
+  padding: 13px;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  width: 200px;
+  margin: 5px 0;
+  display: block;
+  text-decoration: none;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease-in;
+  color: #0a467e;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+}
+a:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 125px;
+  right: 125px;
+  top: 0;
+  background: #fff;
+  height: 45px;
+  transition: 0.4s;
+  opacity: 0.3;
+}
+a:hover:before {
+  left: 0;
+  right: 0;
+}
+a:hover {
+  /* border: 1px solid #b993d6; */
+}
+.active a {
+  background: #fff;
+}
+.active a:before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  left: 125px;
+  right: 125px;
+  top: 0;
+  background: linear-gradient(to right, #8ca6db, #b993d6);
+  height: 45px;
+  transition: 0.4s;
+  opacity: 0.3;
+}
+.active a:hover:before {
+  left: 0;
+  right: 0;
+}
+.active a:hover {
+  border: 1px solid #b993d6;
+}
+.active a {
+  background: #fff;
+}
+a:active {
+  color: #fff;
 }
 </style>

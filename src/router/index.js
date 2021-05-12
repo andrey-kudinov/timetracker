@@ -10,20 +10,20 @@ const routes = [
     meta: { layout: "main", log: true },
     component: () => import("@/views/Home.vue"),
   },
-  // {
-  //   path: "/history",
-  //   name: "History",
-  //   meta: { layout: "main", log: true },
-  //   component: () =>
-  //     import("@/views/History.vue"),
-  // },
-  // {
-  //   path: "/profile",
-  //   name: "Profile",
-  //   meta: { layout: "main", log: true },
-  //   component: () =>
-  //     import("@/views/Profile.vue"),
-  // },
+  {
+    path: "/time",
+    name: "Time",
+    meta: { layout: "main", log: true },
+    component: () =>
+      import("@/views/Time.vue"),
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    meta: { layout: "main", log: true },
+    component: () =>
+      import("@/views/Profile.vue"),
+  },
   // {
   //   path: "/info",
   //   name: "Info",

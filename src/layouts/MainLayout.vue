@@ -34,7 +34,7 @@ export default {
   },
   data() {
     return {
-      isFull: false,
+      isFull: true,
     };
   },
   methods: {
@@ -84,6 +84,7 @@ export default {
   grid-area: sd;
   width: 25%;
   transition: 0.3s;
+  display: none;
 }
 @media all and (max-width: 768px) {
   .sidebar {

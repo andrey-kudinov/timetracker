@@ -11,7 +11,7 @@ export default {
 
 <style scoped>
 .main {
-  background-color: #dadada;
+  background-color: rgb(76, 0, 130);
   min-height: 100vh;
   display: grid;
   place-items: center;

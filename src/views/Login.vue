@@ -5,13 +5,13 @@
       rel="stylesheet"
       type="text/css"
     />
-    <Toast :toast="toast" :class="{'showToast': toast.toast}"/>
+    <Toast :toast="toast" :class="{ showToast: toast.toast }" />
     <transition
       name="custom-classes-transition"
-      enter-active-class="animated tada"
-      leave-active-class="animated bounceOutRight"
+      enter-active-class="animated rotateIn"
+      leave-active-class="animated rotateOut"
     >
-      <section class="form" v-if="!isReg" :class="{ 'check-false': shake }">
+      <section class="form" v-if="isLog" :class="{ 'check-false': shake }">
         <div class="input-wrap">
           <input
             type="email"
@@ -47,15 +47,15 @@
           >Введите пароль (минимум 8 символов)</span
         >
         <button class="btn btn_ligth-blue submit" @click="auth">Войти</button>
-        <button class="btn btn_white submit" @click="isReg = !isReg">
+        <button class="btn btn_white submit" @click="toggle">
           Перейти к регистрации
         </button>
       </section>
     </transition>
     <transition
       name="custom-classes-transition"
-      enter-active-class="animated tada"
-      leave-active-class="animated bounceOutRight"
+      enter-active-class="animated rotateIn"
+      leave-active-class="animated rotateOut"
     >
       <section class="form" v-if="isReg">
         <div class="input-wrap">
@@ -93,7 +93,7 @@
           >Введите пароль (минимум 8 символов)</span
         >
         <button class="btn btn_ligth-blue submit" @click="reg">Создать</button>
-        <button class="btn btn_white submit" @click="isReg = !isReg">
+        <button class="btn btn_white submit" @click="toggle">
           Назад
         </button>
       </section>
@@ -113,6 +113,7 @@ export default {
   data() {
     return {
       isReg: false,
+      isLog: true,
       email: "",
       password: "",
       regEmail: "",
@@ -129,6 +130,19 @@ export default {
   },
   methods: {
     ...mapActions(["logIn", "register"]),
+    toggle() {
+      if (this.isLog) {
+        this.isLog = !this.isLog;
+        setTimeout(() => {
+          this.isReg = !this.isReg;
+        }, 1000);
+      } else {
+        this.isReg = !this.isReg;
+        setTimeout(() => {
+          this.isLog = !this.isLog;
+        }, 1000);
+      }
+    },
     checkEmail() {
       // * валидация email
       if (!this.email.length) {
@@ -284,11 +298,14 @@ export default {
 }
 .form {
   width: 500px;
+  display: grid;
+  place-items: center;
   background-color: #fff;
-  padding: 30px;
+  border: 8px solid rgba(76, 0, 130, 0.452);
+  border-radius: 50%;
+  padding: 133px 30px;
   display: grid;
   gap: 8px;
-  border-radius: 5px;
   margin-bottom: 50px;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.02),
     0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
@@ -313,6 +330,7 @@ input {
   color: #56565a;
   background: #fff;
   position: relative;
+  border-radius: 30px;
 }
 .hr {
   color: red;
