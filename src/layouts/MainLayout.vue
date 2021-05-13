@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import Header from "@/components/Base/Header";
-import Sidebar from "@/components/Base/Sidebar";
-import Footer from "@/components/Base/Footer";
+import Header from "@/components/base/Header";
+import Sidebar from "@/components/base/Sidebar";
+import Footer from "@/components/base/Footer";
 
 export default {
   name: "main-layout",

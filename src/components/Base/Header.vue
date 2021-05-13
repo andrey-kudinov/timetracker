@@ -18,8 +18,8 @@
     </div>
 
     <div class="buttons">
-      <!-- <button class="btn btn_white btn_change" @click="changeFavicon">Сменить иконку</button> -->
-      <button class="btn btn_white btn_out" @click="exit">Выйти</button>
+      <!-- <button class="btn btn_secondary btn_change" @click="changeFavicon">Сменить иконку</button> -->
+      <button class="btn btn_secondary btn_out" @click="exit">Выйти</button>
     </div>
   </div>
 </template>
@@ -93,10 +93,15 @@ export default {
     rgb(122, 0, 209) 0%,
     rgba(76, 0, 130) 100%
   );
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 94%);
+  background-color: #000000;
+  background-image: linear-gradient(147deg, #000000 0%, #2c3e50 74%);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: inset 0 0 10px #000000;
 }
 @media all and (max-width: 768px) {
   .header {
@@ -108,14 +113,11 @@ export default {
   }
 }
 .time {
-  background: radial-gradient(
-    circle,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
+  background-color: #2f4353;
+  background-image: linear-gradient(315deg, #d2ccc4 0%, #2f4353 85%);
   margin-left: 30px;
   padding: 15px;
-  color: #0a467e;
+  color: rgb(27, 27, 27);
   font-weight: bold;
   border-radius: 15px;
 }
@@ -147,7 +149,7 @@ export default {
   margin-right: 15px;
 }
 .btn_out {
-  width: 180px;
+  width: 200px;
 }
 @media all and (max-width: 768px) {
   .btn_out {
@@ -167,8 +169,9 @@ li {
 }
 a {
   background: linear-gradient(to right, #8ca6db, #b993d6);
+  background-color: #2f4353;
+  background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
   padding: 13px;
-  border: 1px solid #fff;
   border-radius: 30px;
   width: 200px;
   margin: 5px 0;
@@ -178,8 +181,11 @@ a {
   position: relative;
   overflow: hidden;
   transition: background 0.3s ease-in;
-  color: #0a467e;
+  color: #1b1b1b;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  height: 45px;
+  line-height: 22px;
+  box-shadow: inset 0 0 10px #000000;
 }
 a:before {
   content: "";
@@ -189,6 +195,7 @@ a:before {
   right: 125px;
   top: 0;
   background: #fff;
+  border-radius: 30px;
   height: 45px;
   transition: 0.4s;
   opacity: 0.3;
@@ -220,7 +227,6 @@ a:hover {
   right: 0;
 }
 .active a:hover {
-  border: 1px solid #b993d6;
 }
 .active a {
   background: #fff;

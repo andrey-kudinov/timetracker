@@ -12,42 +12,45 @@
   height: 45px;
 
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 4px #000000;
 }
 
-.btn_ligth-blue {
-  background: #1690c3;
+.btn_primary {
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
   color: #ffffff;
   transition: 0.3s;
   white-space: nowrap;
   position: relative;
 }
-.btn_ligth-blue:before {
+.btn_primary:before {
   content: "";
   position: absolute;
   z-index: 1;
   left: 51%;
   right: 51%;
   top: 0;
-  background: #8ca6db;
+  background: linear-gradient(to right,#2f4353, #d2ccc4 );
   height: 45px;
-  transition: .4s;
-  opacity: .5;
+  transition: 0.4s;
+  opacity: 0.5;
   border-radius: 30px;
 }
 @media (max-width: 768px) {
-  .btn_ligth-blue:before {
+  .btn_primary:before {
     height: 38px;
   }
 }
-.btn_ligth-blue:hover:before{
+.btn_primary:hover:before {
   left: 0;
   right: 0;
 }
-/* .btn_ligth-blue:hover {
+/* .btn_primary:hover {
   background: #168fc3b7;
 } */
-.btn_ligth-blue:active {
-  background: #1690c3;
+.btn_primary:active {
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
 }
 
 .btn_dark-blue {
@@ -62,45 +65,47 @@
   background: #0a467e;
 }
 
-.btn_white {
+.btn_secondary {
   background: #ffffff;
-  border: 1px solid #dadada;
-  color: #0a467e;
+  background-color: #2f4353;
+  background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
+  color: #1b1b1b;;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
-.btn_white:before {
+.btn_secondary:before {
   content: "";
   position: absolute;
   z-index: 1;
   left: 51%;
   right: 51%;
   top: 0;
-  background: linear-gradient(to right, #8ca6db, #b993d6);
+  background: linear-gradient(to right,#2f4353, #d2ccc4 );
   height: 45px;
-  transition: .4s;
-  opacity: .5;
+  transition: 0.4s;
+  opacity: 0.5;
   border-radius: 30px;
 }
 @media (max-width: 768px) {
-  .btn_white:before {
+  .btn_secondary:before {
     height: 38px;
   }
 }
-.btn_white:hover:before{
+.btn_secondary:hover:before {
   left: 0;
   right: 0;
 }
-.btn_white:hover{
-  border: 1px solid #b993d6;
+.btn_secondary:hover {
 }
-.btn_white:active {
+.btn_secondary:active {
   background: #ffffff;
-  color: #b993d6;
+  background-color: #2f4353;
+  background-image: linear-gradient(315deg, #2f4353 0%, #d2ccc4 74%);
+  color: #ffffff;
 }
-.btn_white img {
+.btn_secondary img {
   margin-right: 11px;
   margin-top: 1px;
 }
@@ -128,7 +133,7 @@
 }
 
 @media (max-width: 768px) {
-  .btn{
+  .btn {
     width: 100%;
     height: 38px;
   }

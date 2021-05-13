@@ -46,8 +46,8 @@
         <span class="email-false" :class="{ 'text-false': !isPassword }"
           >Введите пароль (минимум 8 символов)</span
         >
-        <button class="btn btn_ligth-blue submit" @click="auth">Войти</button>
-        <button class="btn btn_white submit" @click="toggle">
+        <button class="btn btn_primary submit" @click="auth">Войти</button>
+        <button class="btn btn_secondary submit" @click="toggle">
           Перейти к регистрации
         </button>
       </section>
@@ -92,8 +92,8 @@
         <span class="email-false" :class="{ 'text-false': !isRegPassword }"
           >Введите пароль (минимум 8 символов)</span
         >
-        <button class="btn btn_ligth-blue submit" @click="reg">Создать</button>
-        <button class="btn btn_white submit" @click="toggle">
+        <button class="btn btn_primary submit" @click="reg">Создать</button>
+        <button class="btn btn_secondary submit" @click="toggle">
           Назад
         </button>
       </section>
@@ -301,7 +301,11 @@ export default {
   display: grid;
   place-items: center;
   background-color: #fff;
-  border: 8px solid rgba(76, 0, 130, 0.452);
+  background-color: #d9e4f5;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  background-color: #5b6467;
+  background-image: linear-gradient(315deg, #5b6467 0%, #8b939a 74%);
+  /* border: 8px solid rgba(76, 0, 130, 0.452); */
   border-radius: 50%;
   padding: 133px 30px;
   display: grid;
@@ -311,6 +315,7 @@ export default {
     0 6.7px 5.3px rgba(0, 0, 0, 0.028), 0 12.5px 10px rgba(0, 0, 0, 0.035),
     0 22.3px 17.9px rgba(0, 0, 0, 0.042), 0 41.8px 33.4px rgba(0, 0, 0, 0.05),
     0 100px 80px rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0 0 10px #000000;
 }
 .form > * {
   grid-row: span 1;
@@ -333,19 +338,22 @@ input {
   border-radius: 30px;
 }
 .hr {
-  color: red;
-  height: 2px;
+  color: #ff0000;
+  color: #485461;
+  height: 4px;
   border-width: 0;
   background: red;
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
   position: absolute;
   left: 51%;
   right: 51%;
   transition: 0.4s;
-  bottom: 0;
+  bottom: -4px;
 }
 .hr-false {
-  left: 0;
-  right: 0;
+  left: 15px;
+  right: 15px;
 }
 input::placeholder {
   color: #8f8f8f;
@@ -358,7 +366,7 @@ input::placeholder {
 }
 .img {
   position: absolute;
-  right: 6px;
+  right: 10px;
   bottom: 10px;
   height: 20px;
   width: 20px;
@@ -380,7 +388,7 @@ span {
   text-align: left;
   font-size: 16px;
   line-height: 18px;
-  color: red;
+  color: #151616;
   opacity: 0;
   transition: 0.3s ease;
 }

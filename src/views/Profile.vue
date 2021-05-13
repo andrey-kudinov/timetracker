@@ -3,28 +3,28 @@
     <div class="content">
       <div class="time">
         <div class="time__item">
-          <button class="btn btn_white">Пришел</button>
+          <button class="btn btn_secondary">Пришел</button>
           <div class="text">22:22:22</div>
-          <button class="btn btn_white">Введенное</button>
-          <button class="btn btn_white">Удалить</button>
+          <button class="btn btn_secondary">Введенное</button>
+          <button class="btn btn_secondary">Удалить</button>
         </div>
         <div class="time__item">
-          <button class="btn btn_white">Пришел</button>
+          <button class="btn btn_secondary">Пришел</button>
           <div class="text">22:22:22</div>
-          <button class="btn btn_white">Введенное</button>
-          <button class="btn btn_white">Удалить</button>
+          <button class="btn btn_secondary">Введенное</button>
+          <button class="btn btn_secondary">Удалить</button>
         </div>
         <div class="time__item">
-          <button class="btn btn_white">Пришел</button>
+          <button class="btn btn_secondary">Пришел</button>
           <div class="text">22:22:22</div>
-          <button class="btn btn_white">Введенное</button>
-          <button class="btn btn_white">Удалить</button>
+          <button class="btn btn_secondary">Введенное</button>
+          <button class="btn btn_secondary">Удалить</button>
         </div>
         <div class="time__item">
-          <button class="btn btn_white">Пришел</button>
+          <button class="btn btn_secondary">Пришел</button>
           <div class="text">22:22:22</div>
-          <button class="btn btn_white">Введенное</button>
-          <button class="btn btn_white">Удалить</button>
+          <button class="btn btn_secondary">Введенное</button>
+          <button class="btn btn_secondary">Удалить</button>
         </div>
       </div>
       <div class="office">
