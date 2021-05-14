@@ -2,14 +2,14 @@ import firebase from 'firebase/app'
 
 export default {
   actions: {
-    async createNote({ commit, dispatch }, { name, text, date, enable = true }) {
+    async createNote({ commit, dispatch }, { action, month, day, date, time, enable = true }) {
       try {
         const uid = await dispatch("getUid");
         const note = await firebase
           .database()
-          .ref(`/users/${uid}/notes`)
-          .push({ name, text, date, enable });
-        return { name, text, date, enable, id: note.key };
+          .ref(`/users/${uid}/${month}/${day}/${action}`)
+          .push({ date, time, enable });
+        return { date, time, enable, id: note.key };
       } catch (e) {
         commit("setError", e);
         throw e;
@@ -22,7 +22,7 @@ export default {
           (
             await firebase
               .database()
-              .ref(`/users/${uid}/notes`)
+              .ref(`/users/${uid}`)
               .once("value")
           ).val() || {};
         return Object.keys(notes).map(key => ({...notes[key], id: key}))

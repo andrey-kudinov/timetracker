@@ -3,9 +3,11 @@
     <div class="content">
       <div class="time">
         <div class="time__item">
-          <button class="btn btn_secondary">Пришел</button>
+          <button class="btn btn_secondary" @click="add('пришел')">
+            Пришел
+          </button>
           <div class="input">
-            <input type="text" name="" id="">
+            <input type="time" name="" id="" v-model="come" />
             <div class="img" @click="isCome = !isCome">
               <img :src="require('@/assets/img/pencil.svg')" alt="" />
             </div>
@@ -14,8 +16,11 @@
           <button class="btn btn_secondary" v-show="isCome">Удалить</button>
         </div>
         <div class="time__item">
-          <button class="btn btn_secondary">Ушел на обед</button>
+          <button class="btn btn_secondary" @click="add('на обед')">
+            Ушел на обед
+          </button>
           <div class="input">
+            <input type="time" name="" id="" v-model="lunchStart" />
             <div class="img" @click="isLanchStart = !isLanchStart">
               <img :src="require('@/assets/img/pencil.svg')" alt="" />
             </div>
@@ -28,8 +33,11 @@
           </button>
         </div>
         <div class="time__item">
-          <button class="btn btn_secondary">Вернулся с обеда</button>
+          <button class="btn btn_secondary" @click="add('с обеда')">
+            Вернулся с обеда
+          </button>
           <div class="input">
+            <input type="time" name="" id="" v-model="lunchEnd" />
             <div class="img" @click="isLanchFinish = !isLanchFinish">
               <img :src="require('@/assets/img/pencil.svg')" alt="" />
             </div>
@@ -42,8 +50,11 @@
           </button>
         </div>
         <div class="time__item">
-          <button class="btn btn_secondary">Ушел домой</button>
+          <button class="btn btn_secondary" @click="add('ушел')">
+            Ушел домой
+          </button>
           <div class="input">
+            <input type="time" name="" id="" v-model="leave" />
             <div class="img" @click="isLeave = !isLeave">
               <img :src="require('@/assets/img/pencil.svg')" alt="" />
             </div>
@@ -55,19 +66,27 @@
       <div class="office">
         <div class="office__item">
           <h2>Пришли:</h2>
-          <div class="text_2" v-for="(p, i) in come" :key="i">{{ p.name }}</div>
+          <div class="text_2" v-for="(p, i) in comeArr" :key="i">
+            {{ p.name }}
+          </div>
         </div>
         <div class="office__item">
           <h2>На обеде:</h2>
-          <div class="text_2" v-for="(p, i) in come" :key="i">{{ p.name }}</div>
+          <div class="text_2" v-for="(p, i) in comeArr" :key="i">
+            {{ p.name }}
+          </div>
         </div>
         <div class="office__item">
           <h2>Ушли домой:</h2>
-          <div class="text_2" v-for="(p, i) in come" :key="i">{{ p.name }}</div>
+          <div class="text_2" v-for="(p, i) in comeArr" :key="i">
+            {{ p.name }}
+          </div>
         </div>
         <div class="office__item">
           <h2>Не пришли:</h2>
-          <div class="text_2" v-for="(p, i) in come" :key="i">{{ p.name }}</div>
+          <div class="text_2" v-for="(p, i) in comeArr" :key="i">
+            {{ p.name }}
+          </div>
         </div>
       </div>
     </div>
@@ -75,11 +94,14 @@
 </template>
 
 <script>
+import dateFilter from "@/filters/date.filter";
+// import Toast from "@/components/Toast";
+import { mapActions } from "vuex";
 export default {
   name: "Home",
   data() {
     return {
-      come: [
+      comeArr: [
         { name: "Andrey" },
         { name: "Andrey" },
         { name: "Andrey" },
@@ -91,7 +113,62 @@ export default {
       isLeave: false,
       isLanchStart: false,
       isLanchFinish: false,
+      date: new Date(),
+      come: null,
+      lunchStart: null,
+      lunchEnd: null,
+      leave: null,
+      notes: null,
     };
+  },
+  methods: {
+    ...mapActions(["createNote", "fetchNotes"]),
+    async add(userAction) {
+      console.log(userAction);
+      console.log(dateFilter(new Date(), "month"));
+      console.log(dateFilter(new Date(), "day"));
+      console.log(new Date());
+      console.log(dateFilter(new Date(), "short"));
+      switch (userAction) {
+        case "пришел":
+          this.come = dateFilter(new Date(), "short");
+          break;
+        case "на обед":
+          this.lunchStart = dateFilter(new Date(), "short");
+          break;
+        case "с обеда":
+          this.lunchEnd = dateFilter(new Date(), "short");
+          break;
+        case "ушел":
+          this.leave = dateFilter(new Date(), "short");
+          break;
+        default:
+          break;
+      }
+      try {
+        const note = await this.createNote({
+          action: userAction,
+          month: dateFilter(new Date(), "month"),
+          day: dateFilter(new Date(), "day"),
+          date: new Date(),
+          time: dateFilter(new Date(), "short"),
+        });
+        console.log("note -", note);
+      } catch (e) {
+        console.log("add e -", e);
+      }
+    },
+    async start() {
+      this.notes = await this.fetchNotes();
+      console.log(this.notes);
+      this.notes = this.notes.filter((el) => el.id == "май")[0][14]["пришел"];
+      console.log(this.notes);
+      this.notes = Object.keys(this.notes).map(key => ({...this.notes[key], id: key}))
+      console.log(this.notes);
+    },
+  },
+  async mounted() {
+    await this.start();
   },
 };
 </script>
@@ -157,17 +234,18 @@ h2 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 20px;
+  width: 1030px;
 }
 .btn {
   font-size: 24px;
 }
 .img {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   cursor: pointer;
   position: absolute;
-  right: 15px;
-  bottom: 5px;
+  left: 20px;
+  bottom: 7px;
 }
 .img img {
   width: 100%;
@@ -186,15 +264,19 @@ h2 {
   border-radius: 30px;
   height: 45px;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 input {
   background: transparent;
   border-radius: 30px;
   color: white;
   font-weight: bold;
-  font-size: 30px;
-  line-height: 42px;
-  width: 240px;
+  font-size: 28px;
+  line-height: 25px;
+  width: 170px;
   padding: 0 20px;
+  box-shadow: none;
 }
 </style>

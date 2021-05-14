@@ -13,5 +13,18 @@ export default function dateFilter(value, format = 'date') {
     options.second = '2-digit'
   }
 
+  if (format.includes('short')) {
+    options.hour = '2-digit'
+    options.minute = '2-digit'
+  }
+
+  if (format.includes('month')) {
+    options.month = 'long'
+  }
+
+  if (format.includes('day')) {
+    options.day = '2-digit'
+  }
+
   return new Intl.DateTimeFormat('ru-RU', options).format(new Date(value))
 }
