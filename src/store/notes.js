@@ -15,6 +15,19 @@ export default {
         throw e;
       }
     },
+    async createDayStats({ commit, dispatch }, { action, month, day, enable = true }) {
+      try {
+        const uid = await dispatch("getUid");
+        const note = await firebase
+          .database()
+          .ref(`/stats/${month}/${day}/${action}/${uid}`)
+          .push({ enable });
+        return { enable, id: note.key };
+      } catch (e) {
+        commit("setError", e);
+        throw e;
+      }
+    },
     async fetchNotes({ commit, dispatch }) {
       try {
         const uid = await dispatch("getUid");

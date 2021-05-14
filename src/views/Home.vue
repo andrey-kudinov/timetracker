@@ -119,10 +119,14 @@ export default {
       lunchEnd: null,
       leave: null,
       notes: null,
+      fetchCome: null,
+      fetchLunchStart: null,
+      fetchLunchEnd: null,
+      fetchLeave: null,
     };
   },
   methods: {
-    ...mapActions(["createNote", "fetchNotes"]),
+    ...mapActions(["createNote", "fetchNotes", "createDayStats"]),
     async add(userAction) {
       console.log(userAction);
       console.log(dateFilter(new Date(), "month"));
@@ -158,13 +162,32 @@ export default {
         console.log("add e -", e);
       }
     },
+    isEmpty(obj) {
+      for (let key in obj) {
+        return false;
+      }
+      return true;
+    },
+    fetchTime(status, array) {
+      if (!array.length) return;
+      array = array.filter((el) => el.id == dateFilter(new Date(), "month"))[0][
+        dateFilter(new Date(), "day")
+      ][status];
+      if (this.isEmpty(array)) return;
+      array = Object.keys(array).map((key) => ({ ...array[key], id: key }));
+      console.log(status, array[array.length - 1].time);
+    },
     async start() {
       this.notes = await this.fetchNotes();
-      console.log(this.notes);
-      this.notes = this.notes.filter((el) => el.id == "май")[0][14]["пришел"];
-      console.log(this.notes);
-      this.notes = Object.keys(this.notes).map(key => ({...this.notes[key], id: key}))
-      console.log(this.notes);
+      this.fetchCome = [...this.notes];
+      this.fetchLunchStart = [...this.notes];
+      this.fetchLunchEnd = [...this.notes];
+      this.fetchLeave = [...this.notes];
+
+      this.fetchTime("пришел", this.fetchCome);
+      this.fetchTime("на обед", this.fetchLunchStart);
+      this.fetchTime("с обеда", this.fetchLunchEnd);
+      this.fetchTime("ушел", this.fetchLeave);
     },
   },
   async mounted() {
